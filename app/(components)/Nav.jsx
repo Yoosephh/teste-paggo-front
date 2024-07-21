@@ -1,22 +1,27 @@
 'use client'
 import Link from "next/link"
-import { useContext } from "react"
-import AuthContext from "../(contexts)/authContext"
+
+import { getSession, useSession } from "next-auth/react"
+import { useEffect, useState } from "react";
 
 function Nav() {
-  const {session} = useContext(AuthContext);
+  const {data, status} = useSession();
+
+  // useEffect(()=>{
+  //   console.log(data)
+  // },[data])
 
   return (
     <header>
-      <nav>
+      <nav> 
         <div>Paggo.app</div>
         <div>
-          {session && (
+          {data && (
             <>
-              <div>{session?.user?.name}</div>
+              <div>{data?.user?.name}</div>
               {/* <image src={session?.user?.image} alt="profile-photo" /> */}
               {/* <button onClick={() => signOut({ callbackUrl: 'http://localhost:3000/api/auth/signin' })}>Sign out</button> */}
-              <Link href="/api/auth/signout?callbackUrl=/api/auth/signin">Logout</Link>
+              <Link href="/api/auth/signout?callbackUrl=/" >Logout</Link>
             </>
           )}
         </div>

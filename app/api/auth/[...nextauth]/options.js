@@ -31,8 +31,23 @@ export const options = {
     })
   ],
   callbacks: {
-    async session(data) {
-      console.log(data)
-  }
+    async session({ session, token }) {
+      console.log(session)
+      console.log(token)
+
+      session.user.id = token.id;
+      session.accessToken = token.accessToken;
+      return session;
+    },
+    async jwt({ token, user, account, profile }) {
+      console.log({token, user, account, profile})
+      if (user) {
+        token.id = user.id;
+      }
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    }
 }
 }
