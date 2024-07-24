@@ -1,9 +1,9 @@
 
 'use client'
-import { getSession, SessionProvider } from "next-auth/react";
-import AuthContext, { AuthProvider } from "./(contexts)/authContext";
-import Nav from "./(components)/Nav";
-import MainContent from "./(components)/MainContent";
+import { SessionProvider } from "next-auth/react";
+import  { AuthProvider } from "./(contexts)/authContext";
+import "./global.css"
+import Header from "./(components)/Header";
 
 export default function RootLayout({ children }) {
 
@@ -12,7 +12,10 @@ export default function RootLayout({ children }) {
     <SessionProvider>
       <AuthProvider>
         <body>
+        <Header />
+        <main>
           {children}
+        </main>
         </body>
       </AuthProvider>
     </SessionProvider>

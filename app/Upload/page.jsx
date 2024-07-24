@@ -1,13 +1,9 @@
 import React from 'react'
 import MainContent from '../(components)/MainContent'
-import Nav from '../(components)/Nav'
+import Header from '../(components)/Header'
 
 export default function Upload() {
   return (
-    <>
-      <Nav/>
       <MainContent />
-    </>
-
   )
 }
