@@ -6,26 +6,32 @@ import { createContext, useEffect, useState } from "react"
 const AuthContext = createContext();
 
 export function AuthProvider({children}) {
-  const [fileResponse, setFileResponse] = useState(null);
+  const [fileResponse, setFileResponse] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null)
   const [authToken, setAuthToken] = useState(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/api/auth/signin?callbackUrl=/Upload");
-    }
-  });
+  const { data: session, status } = useSession();
 
-  function resetApp() {
-    setFileResponse(null);
-    setAuthToken(null);
-    setLoading(false);
-  }
+
+  useEffect(()=> {
+    if(session) {
+      setAuthToken(session.accessToken)
+    }
+    if(status === "unauthenticated") {
+      router.push("/Signin");
+    }
+    if(status === "authenticated") {
+      router.push("/Upload")
+    }
+  }, [session])
+
+
+
 
   return (
-      <AuthContext.Provider value={{session, fileResponse, setFileResponse, authToken, setAuthToken, loading, setLoading, resetApp}}>
+      <AuthContext.Provider value={{session, fileResponse, setFileResponse, authToken, setAuthToken, loading, setLoading, selectedFile, setSelectedFile}}>
         {children}
       </AuthContext.Provider>
   )
