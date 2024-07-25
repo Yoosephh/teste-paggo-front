@@ -36,8 +36,6 @@ const LoadingContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(to bottom left, black, grey);
   color: white;
   font-family: Arial, sans-serif;
 `;

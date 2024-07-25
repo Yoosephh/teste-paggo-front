@@ -5,6 +5,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { FaSignOutAlt } from 'react-icons/fa'
 import { SiNextdotjs } from 'react-icons/si'
+import { Button } from "../Signin/page";
 
 function Header() {
   const { data } = useSession();
@@ -35,10 +36,10 @@ function Header() {
           {data?.user && (
             <>
               <UserName>{data?.user?.name}</UserName>
-              <SignOutButton onClick={() => signOut()}>
+              <Button onClick={() => signOut()}>
                 <FaSignOutAlt size={20} />
                 Sign out
-              </SignOutButton>
+              </Button>
             </>
           )}
         </UserContainer>
@@ -80,25 +81,4 @@ const UserContainer = styled.div`
 const UserName = styled.div`
   margin-right: 1rem;
   font-size: 1rem;
-`
-
-const SignOutButton = styled.button`
-  display: flex;
-  align-items: center;
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #555;
-  }
-
-  svg {
-    margin-right: 0.5rem;
-  }
 `

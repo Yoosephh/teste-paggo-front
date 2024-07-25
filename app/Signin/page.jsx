@@ -1,20 +1,20 @@
 'use client'
 import { signIn } from 'next-auth/react'
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaGithub, FaGoogle } from 'react-icons/fa'
 import styled from 'styled-components'
-
-
+import AuthContext from '../(contexts)/authContext'
 
 const signin = () => {
+  const {loading} = useContext(AuthContext);
   return (
     <SignInContainer>
         <Title>Paggo.app</Title>
         <Subtitle>Extract texts from images in a simple and quick way</Subtitle>
-        <Button onClick={() => signIn("github", { callbackUrl: 'http://localhost:3000/Upload' })}>
+        <Button disabled={loading} onClick={() => signIn("github", { callbackUrl: 'http://localhost:3000/Upload' })}>
           <FaGithub /> Continue with GitHub
         </Button>
-        <Button onClick={() => signIn("google", { callbackUrl: 'http://localhost:3000/Upload' })}>
+        <Button disabled={loading} onClick={() => signIn("google", { callbackUrl: 'http://localhost:3000/Upload' })}>
           <FaGoogle /> Continue with Google
         </Button>
     </SignInContainer>
@@ -44,7 +44,7 @@ const Subtitle = styled.p`
   margin-bottom: 2rem;
 `
 
-const Button = styled.button`
+export const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,6 +60,12 @@ const Button = styled.button`
 
   &:hover {
     background-color: #555;
+  }
+
+  &:disabled {
+    background-color: #777;
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 
   svg {

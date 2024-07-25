@@ -1,22 +1,36 @@
-import React, { useRef, useContext, useState } from 'react';
+import React, { useRef, useContext, useState, useEffect } from 'react';
 import AuthContext from '../(contexts)/authContext';
 import axios from 'axios';
 import styled from 'styled-components';
+import { Button } from "../Signin/page";
+import Swal from 'sweetalert2';
 
 const LeftContent = () => {
   const { loading, setLoading, fileResponse, setFileResponse, selectedFile, setSelectedFile, authToken } = useContext(AuthContext);
   const inputFileRef = useRef(null);
   const [fileName, setFileName] = useState('');
 
+  useEffect(()=> {
+  },[inputFileRef])
+
   function handleImageSelect(e) {
     const file = e.target.files[0];
+    if (!file.type.startsWith('image/')) {
+      Swal.fire({
+        title: "Invalid file type!",
+        text: "Please select an image file.",
+        icon: "error"
+      });
+      inputFileRef.current.value = '';
+      return;
+    }
     setSelectedFile(file);
     setFileName(file.name);
   }
 
   function resetApp() {
     setSelectedFile(null);
-    setFileResponse(null);
+    setFileResponse("Please, select an image.");
     setLoading(false);
     setFileName('');
     inputFileRef.current.value = '';
@@ -24,7 +38,11 @@ const LeftContent = () => {
 
   async function handleSubmitFile() {
     if (!selectedFile) {
-      alert("No image selected! Select one first.");
+      Swal.fire({
+        title: "No image selected!",
+        text: "Please select an image to upload",
+        icon: "warning"
+      })
       return;
     }
   
@@ -42,7 +60,11 @@ const LeftContent = () => {
     }).then(res => {
       setFileResponse(res.data.text.text);
     }).catch(err => {
-      console.log(err);
+      Swal.fire({
+        title: "Error uploading file",
+        text: err.response.data.message,
+        icon: "error"
+      })
     }).finally(() => {
       setLoading(false);
     });  
@@ -67,10 +89,10 @@ const LeftContent = () => {
         accept="image/*"
         onChange={handleImageSelect}
       />
-      <StyledButton onClick={() => inputFileRef.current.click()}>
+      <Button disabled={loading} onClick={() => inputFileRef.current.click()}>
         Select File
-      </StyledButton>
-      {fileName && <FileName>{fileName}</FileName>}
+      </Button>
+      {fileName ? <FileName>{fileName}</FileName> : <FileName>No image selected.</FileName>}
       
       <ButtonContainer>
         <Button onClick={resetApp} disabled={loading}>Clear field</Button>
@@ -116,27 +138,6 @@ const HiddenFileInput = styled.input`
   display: none;
 `
 
-const StyledButton = styled.button`
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  margin-bottom: 1rem;
-
-  &:hover {
-    background-color: #555;
-  }
-
-  &:disabled {
-    background-color: #555;
-    cursor: not-allowed;
-  }
-`
-
 const FileName = styled.div`
   margin-top: 0.5rem;
   margin-bottom: 2rem;
@@ -151,23 +152,3 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
 `
 
-const Button = styled.button`
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  margin-right: 0.5rem;
-
-  &:hover {
-    background-color: #555;
-  }
-
-  &:disabled {
-    background-color: #555;
-    cursor: not-allowed;
-  }
-`
