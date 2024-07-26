@@ -28,7 +28,7 @@ export const options = {
       clientSecret: process.env.GOOGLE_Secret,
     })
   ],
-  secret: "RTs0NVIsvB86N1SJxzXRiF+ZFTdAjxxee65ilQWPrgA",
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async session({ session, token }) {
       session.user.id = token.id;
