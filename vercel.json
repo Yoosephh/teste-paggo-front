@@ -1,0 +1,10 @@
+{ 
+  "remotePatterns": [
+      {
+        "protocol": "http",
+        "hostname": "example.com",
+        "port": "",
+        "pathname": "/**"
+      }
+    ]
+}
