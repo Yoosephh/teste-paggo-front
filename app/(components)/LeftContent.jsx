@@ -58,7 +58,7 @@ const LeftContent = () => {
         "Content-Type": "multipart/form-data",
       },
     }).then(res => {
-      setFileResponse(res.data.text.text);
+      setFileResponse(res.data.text);
     }).catch(err => {
       Swal.fire({
         title: "Error uploading file",

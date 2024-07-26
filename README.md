@@ -1,6 +1,9 @@
 <p>
 <h1>Paggo.app</h1>
 <h4>Uma solução para transcrição de textos a partir de imagens!</h4>
+
+## Fluxo da aplicação
+
 <img src="./paggo app.png" alt="App preview"/> 
 </p>
 
@@ -33,7 +36,7 @@ npm install
 
 ## Configuração
 
-<p>Antes de executar a aplicação, você pode precisar configurar algumas variáveis de ambiente. Crie um arquivo `.env` na raiz do projeto e adicione seus respectivos valores para as variáveis:</p>
+Antes de executar a aplicação, você pode precisar configurar algumas variáveis de ambiente. Crie um arquivo `.env` na raiz do projeto e adicione seus respectivos valores para as variáveis:
 
 ```env
 GOOGLE_ID=your_google_id

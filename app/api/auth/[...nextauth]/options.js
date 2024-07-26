@@ -5,7 +5,6 @@ export const options = {
   providers: [
     GitHubProvider({
       profile(profile) {
-        // console.log("Github profile:", profile)
         return {
           id: profile.id,
           name: profile.name,
@@ -18,7 +17,6 @@ export const options = {
     }),
     GoogleProvider({
       profile(profile) {
-        // console.log("Google profile:", profile)
         return {
           id: profile.sub,
           name: profile.name,
