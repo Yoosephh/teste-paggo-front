@@ -9,7 +9,8 @@ const nextConfig = {
     GITHUB_ID:process.env.GITHUB_ID,
     GITHUB_Secret:process.env.GITHUB_Secret,
     NEXTAUTH_SECRET:process.env.NEXTAUTH_SECRET,
-    NEXT_PUBLIC_API_URL:process.env.NEXT_PUBLIC_API_URL
+    NEXT_PUBLIC_API_URL:process.env.NEXT_PUBLIC_API_URL,
+    NEXTAUTH_URL:process.env.NEXTAUTH_URL
   }
 };
 
