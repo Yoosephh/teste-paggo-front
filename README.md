@@ -4,6 +4,7 @@
 
 ## Fluxo da aplicação
 
+
 <img src="./paggo app.png" alt="App preview"/> 
 </p>
 
@@ -13,6 +14,9 @@
 1. Styled-Components v6.1.12;
 1. React-Icons v5.2.1;
 1. Axios v1.7.2;
+
+# Deploy
+A aplicação foi deployada no Amplify: https://main.d3qm1uldqnrzrw.amplifyapp.com/
 
 ## Instalação
 
