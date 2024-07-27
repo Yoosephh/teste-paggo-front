@@ -9,7 +9,7 @@ const LeftContent = () => {
   const { loading, setLoading, fileResponse, setFileResponse, selectedFile, setSelectedFile, authToken } = useContext(AuthContext);
   const inputFileRef = useRef(null);
   const [fileName, setFileName] = useState('');
-
+  
   useEffect(()=> {
   },[inputFileRef])
 
@@ -56,8 +56,8 @@ const LeftContent = () => {
       headers: {
         Authorization: `Bearer ${authToken}`,
         "Content-Type": "multipart/form-data",
-      },
-    }).then(res => {
+      }
+    }, {timeout: 60000}).then(res => {
       setFileResponse(res.data.text);
     }).catch(err => {
       Swal.fire({
